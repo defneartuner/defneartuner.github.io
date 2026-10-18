@@ -1,878 +1,800 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Defne Artuner | 3D Artist & Character Designer</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cormorant Garamond (Serif) & Plus Jakarta Sans (Clean Body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        burgundy: {
-                            DEFAULT: '#800020',
-                            dark: '#580015',
-                            deeper: '#3d000e',
-                            light: '#9e0b30'
-                        },
-                        offwhite: {
-                            DEFAULT: '#FAF9F6',
-                            muted: '#E6E1DA',
-                            dim: 'rgba(250, 249, 246, 0.72)'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        :root {
-            --bg-burgundy: #800020;
-            --text-offwhite: #FAF9F6;
-        }
-
-        body {
-            background-color: #800020;
-            color: #FAF9F6;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-            selection-background-color: #FAF9F6;
-            selection-color: #800020;
-        }
-
-        ::selection {
-            background: #FAF9F6;
-            color: #800020;
-        }
-
-        /* Subtle Ambient Texture & Lighting */
-        .bg-artistic-glow {
-            background: 
-                radial-gradient(circle at 15% 15%, rgba(168, 18, 56, 0.45) 0%, transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(56, 0, 14, 0.65) 0%, transparent 50%),
-                #800020;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #580015;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(250, 249, 246, 0.35);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(250, 249, 246, 0.6);
-        }
-
-        /* Glass & Surface Cards */
-        .burgundy-card {
-            background: rgba(74, 0, 18, 0.55);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(250, 249, 246, 0.22);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .burgundy-card:hover {
-            border-color: rgba(250, 249, 246, 0.5);
-            box-shadow: 0 16px 36px -10px rgba(32, 0, 8, 0.65);
-        }
-
-        /* Smooth Page Transitions */
-        .page-section {
-            display: none;
-            animation: fadeInPage 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeInPage {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Navigation active indicator */
-        .nav-btn {
-            position: relative;
-        }
-        .nav-btn::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            width: 0;
-            height: 1.5px;
-            background-color: #FAF9F6;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        .nav-btn.active::after,
-        .nav-btn:hover::after {
-            width: 80%;
-        }
-
-        /* Artwork Card Zoom */
-        .art-image-wrapper img {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .art-card:hover .art-image-wrapper img {
-            transform: scale(1.06);
-        }
-    </style>
-</head>
-<body class="bg-artistic-glow min-h-screen flex flex-col justify-between antialiased">
-
-    <!-- ================= HEADER / NAVIGATION ================= -->
-    <header class="sticky top-0 z-40 bg-burgundy/90 backdrop-blur-md border-b border-offwhite/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <!-- Brand / Artist Name -->
-            <button onclick="switchPage('portfolio')" class="text-left group focus:outline-none">
-                <span class="font-serif text-2xl sm:text-3xl font-bold tracking-wider text-offwhite block leading-none">
-                    DEFNE ARTUNER
-                </span>
-                <span class="text-xs uppercase tracking-[0.25em] text-offwhite/70 block mt-1">
-                    3D Artist &bull; Sculpture &bull; Character Design
-                </span>
-            </button>
-
-            <!-- Navigation Links -->
-            <nav class="flex items-center space-x-2 sm:space-x-8 text-sm sm:text-base font-medium">
-                <button onclick="switchPage('portfolio')" id="nav-portfolio" class="nav-btn active px-3 py-1.5 text-offwhite tracking-wide transition">
-                    Main Page
-                </button>
-                <button onclick="switchPage('about')" id="nav-about" class="nav-btn px-3 py-1.5 text-offwhite/85 hover:text-offwhite tracking-wide transition">
-                    About the Artist
-                </button>
-                <button onclick="switchPage('contact')" id="nav-contact" class="nav-btn px-3 py-1.5 text-offwhite/85 hover:text-offwhite tracking-wide transition">
-                    Contact
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- ================= MAIN CONTENT CONTAINER ================= -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-8 py-10 sm:py-14">
-
-        <!-- =========================================================
-             PAGE 1: MAIN PORTFOLIO PAGE (4 CATEGORIES + IMAGE UPLOAD)
-             ========================================================= -->
-        <section id="page-portfolio" class="page-section active">
-            
-            <!-- Hero Banner -->
-            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                <p class="text-xs uppercase tracking-[0.3em] text-offwhite/75 mb-2">Curated Works &amp; Archive</p>
-                <h1 class="font-serif text-4xl sm:text-6xl font-semibold text-offwhite tracking-wide leading-tight mb-4">
-                    Portfolio Gallery
-                </h1>
-                <p class="text-sm sm:text-base text-offwhite/80 leading-relaxed">
-                    Explore works across Freelance commissions, Traditional sculpture, 2D character concepts, and 3D digital sculpting. Use the <span class="underline decoration-offwhite/50 underline-offset-4 font-medium">Add Picture</span> button in any section to add your own pieces directly to the gallery.
-                </p>
-
-                <!-- Quick Category Jump Pills -->
-                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-7">
-                    <a href="#cat-freelance" class="px-4 py-2 rounded-full text-xs sm:text-sm border border-offwhite/30 bg-burgundy-dark/60 hover:bg-offwhite hover:text-burgundy transition duration-200">
-                        1. Freelance
-                    </a>
-                    <a href="#cat-traditional" class="px-4 py-2 rounded-full text-xs sm:text-sm border border-offwhite/30 bg-burgundy-dark/60 hover:bg-offwhite hover:text-burgundy transition duration-200">
-                        2. Traditional
-                    </a>
-                    <a href="#cat-2d" class="px-4 py-2 rounded-full text-xs sm:text-sm border border-offwhite/30 bg-burgundy-dark/60 hover:bg-offwhite hover:text-burgundy transition duration-200">
-                        3. 2D Designs
-                    </a>
-                    <a href="#cat-3d" class="px-4 py-2 rounded-full text-xs sm:text-sm border border-offwhite/30 bg-burgundy-dark/60 hover:bg-offwhite hover:text-burgundy transition duration-200">
-                        4. 3D Designs
-                    </a>
-                </div>
-            </div>
-
-            <!-- Dynamic Category Sections Container -->
-            <div id="portfolio-categories-container" class="space-y-20">
-                <!-- Category 1: Freelance -->
-                <div id="cat-freelance" class="scroll-mt-24">
-                    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-offwhite/25 pb-4 mb-8 gap-4">
-                        <div>
-                            <span class="text-xs uppercase tracking-[0.25em] text-offwhite/60 block mb-1">Category 01</span>
-                            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-offwhite">Freelance</h2>
-                        </div>
-                        <button onclick="openUploadModal('freelance', 'Freelance')" class="inline-flex items-center gap-2 self-start sm:self-auto px-5 py-2.5 rounded-xl bg-offwhite text-burgundy font-medium text-sm hover:bg-offwhite/90 transition shadow-lg">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Add Picture</span>
-                        </button>
-                    </div>
-                    <div id="grid-freelance" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-                </div>
-
-                <!-- Category 2: Traditional -->
-                <div id="cat-traditional" class="scroll-mt-24">
-                    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-offwhite/25 pb-4 mb-8 gap-4">
-                        <div>
-                            <span class="text-xs uppercase tracking-[0.25em] text-offwhite/60 block mb-1">Category 02</span>
-                            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-offwhite">Traditional</h2>
-                        </div>
-                        <button onclick="openUploadModal('traditional', 'Traditional')" class="inline-flex items-center gap-2 self-start sm:self-auto px-5 py-2.5 rounded-xl bg-offwhite text-burgundy font-medium text-sm hover:bg-offwhite/90 transition shadow-lg">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Add Picture</span>
-                        </button>
-                    </div>
-                    <div id="grid-traditional" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-                </div>
-
-                <!-- Category 3: 2D Designs -->
-                <div id="cat-2d" class="scroll-mt-24">
-                    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-offwhite/25 pb-4 mb-8 gap-4">
-                        <div>
-                            <span class="text-xs uppercase tracking-[0.25em] text-offwhite/60 block mb-1">Category 03</span>
-                            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-offwhite">2D Designs</h2>
-                        </div>
-                        <button onclick="openUploadModal('2d', '2D Designs')" class="inline-flex items-center gap-2 self-start sm:self-auto px-5 py-2.5 rounded-xl bg-offwhite text-burgundy font-medium text-sm hover:bg-offwhite/90 transition shadow-lg">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Add Picture</span>
-                        </button>
-                    </div>
-                    <div id="grid-2d" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-                </div>
-
-                <!-- Category 4: 3D Designs -->
-                <div id="cat-3d" class="scroll-mt-24">
-                    <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-offwhite/25 pb-4 mb-8 gap-4">
-                        <div>
-                            <span class="text-xs uppercase tracking-[0.25em] text-offwhite/60 block mb-1">Category 04</span>
-                            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-offwhite">3D Designs</h2>
-                        </div>
-                        <button onclick="openUploadModal('3d', '3D Designs')" class="inline-flex items-center gap-2 self-start sm:self-auto px-5 py-2.5 rounded-xl bg-offwhite text-burgundy font-medium text-sm hover:bg-offwhite/90 transition shadow-lg">
-                            <i class="fa-solid fa-plus"></i>
-                            <span>Add Picture</span>
-                        </button>
-                    </div>
-                    <div id="grid-3d" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================================================
-             PAGE 2: ABOUT THE ARTIST
-             ========================================================= -->
-        <section id="page-about" class="page-section">
-            <div class="max-w-4xl mx-auto space-y-12">
-
-                <!-- 1. About the Artist Bio -->
-                <div class="burgundy-card rounded-2xl p-8 sm:p-12">
-                    <span class="text-xs uppercase tracking-[0.3em] text-offwhite/70 block mb-2">Artist Statement &amp; Biography</span>
-                    <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-offwhite mb-6 border-b border-offwhite/20 pb-4">
-                        About the Artist
-                    </h1>
-                    <p class="text-base sm:text-lg text-offwhite/95 leading-relaxed font-light">
-                        I'm Defne, a 3D artist who mainly focuses on sculpting and character design majoring Sculpture in Hacettepe University. My work is deeply rooted in a fascination with human psychology and behavior. I view art and design not just as visual mediums, but as tools for exploring how people connect with characters and process emotion by understanding the underlying mechanics of cognition and empathy. My main goal is to craft pieces that resonate on a deeper level.
-                    </p>
-                </div>
-
-                <!-- 2. Applications I Use (List under About) -->
-                <div class="burgundy-card rounded-2xl p-8 sm:p-10">
-                    <div class="flex items-center gap-3 mb-6 border-b border-offwhite/20 pb-4">
-                        <i class="fa-solid fa-layer-group text-xl text-offwhite/80"></i>
-                        <h2 class="font-serif text-3xl font-semibold text-offwhite">Applications I Use</h2>
-                    </div>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Blender</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Procreate</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Nomad Sculpt</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Clip Studio Paint</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Aseprite</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Unreal Engine</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Unity</span>
-                        </li>
-                        <li class="flex items-center gap-3 p-3.5 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                            <span class="w-2 h-2 rounded-full bg-offwhite"></span>
-                            <span class="font-medium">Python</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- 3. Skills, Experiences, References, and Languages -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                    <!-- Skills -->
-                    <div class="burgundy-card rounded-2xl p-8">
-                        <div class="flex items-center gap-3 mb-6 border-b border-offwhite/20 pb-3">
-                            <i class="fa-solid fa-wand-magic-sparkles text-lg text-offwhite/80"></i>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-offwhite">Skills</h2>
-                        </div>
-                        <ul class="space-y-3 text-offwhite/90">
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>3D Sculpting</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>2D Illustrations</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>2D Character Concept Art</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>2D Animation</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>3D Animation</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>Beginner Level Python</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>Beginner Level Unity</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <i class="fa-solid fa-check text-xs text-offwhite/70"></i>
-                                <span>Beginner Level Unreal Engine</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Experiences -->
-                    <div class="burgundy-card rounded-2xl p-8">
-                        <div class="flex items-center gap-3 mb-6 border-b border-offwhite/20 pb-3">
-                            <i class="fa-solid fa-briefcase text-lg text-offwhite/80"></i>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-offwhite">Experiences</h2>
-                        </div>
-                        <div class="space-y-6">
-                            <div class="relative pl-5 border-l-2 border-offwhite/35">
-                                <span class="text-xs uppercase tracking-widest text-offwhite/70 block">2025 - Now</span>
-                                <h3 class="font-serif text-xl font-semibold text-offwhite mt-0.5">Freelance</h3>
-                                <p class="text-sm text-offwhite/85 mt-1">Creating custom 2D assets</p>
-                            </div>
-
-                            <div class="relative pl-5 border-l-2 border-offwhite/35">
-                                <span class="text-xs uppercase tracking-widest text-offwhite/70 block">2024 - Now</span>
-                                <h3 class="font-serif text-xl font-semibold text-offwhite mt-0.5">B.F.A in Sculpture - Hacettepe University</h3>
-                            </div>
-
-                            <div class="relative pl-5 border-l-2 border-offwhite/35">
-                                <span class="text-xs uppercase tracking-widest text-offwhite/70 block">Leadership &amp; Community</span>
-                                <h3 class="font-serif text-xl font-semibold text-offwhite mt-0.5">Hacettepe University Digital Game Development Community</h3>
-                                <p class="text-sm text-offwhite/85 mt-1">Member of the board of directors</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- References -->
-                    <div class="burgundy-card rounded-2xl p-8">
-                        <div class="flex items-center gap-3 mb-6 border-b border-offwhite/20 pb-3">
-                            <i class="fa-solid fa-user-check text-lg text-offwhite/80"></i>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-offwhite">References</h2>
-                        </div>
-                        <div class="space-y-5">
-                            <div class="p-4 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                                <h3 class="font-serif text-xl font-semibold text-offwhite">Turhan Çetin</h3>
-                                <a href="mailto:tcetin@hacettepe.edu.tr" class="inline-flex items-center gap-2 text-sm text-offwhite/85 hover:text-offwhite underline underline-offset-4 mt-1">
-                                    <i class="fa-regular fa-envelope"></i>
-                                    <span>tcetin@hacettepe.edu.tr</span>
-                                </a>
-                            </div>
-                            <div class="p-4 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                                <h3 class="font-serif text-xl font-semibold text-offwhite">Okan Ercan</h3>
-                                <a href="mailto:okan.ercan@hacettepe.edu.tr" class="inline-flex items-center gap-2 text-sm text-offwhite/85 hover:text-offwhite underline underline-offset-4 mt-1">
-                                    <i class="fa-regular fa-envelope"></i>
-                                    <span>okan.ercan@hacettepe.edu.tr</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Languages -->
-                    <div class="burgundy-card rounded-2xl p-8">
-                        <div class="flex items-center gap-3 mb-6 border-b border-offwhite/20 pb-3">
-                            <i class="fa-solid fa-language text-lg text-offwhite/80"></i>
-                            <h2 class="font-serif text-2xl sm:text-3xl font-semibold text-offwhite">Languages</h2>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                                <span class="font-medium text-offwhite">Turkish</span>
-                                <span class="px-3 py-1 rounded-full text-xs font-medium bg-offwhite text-burgundy">Native</span>
-                            </div>
-                            <div class="flex items-center justify-between p-4 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                                <span class="font-medium text-offwhite">English</span>
-                                <span class="px-3 py-1 rounded-full text-xs font-medium bg-offwhite/90 text-burgundy">Fluent</span>
-                            </div>
-                            <div class="flex items-center justify-between p-4 rounded-xl bg-burgundy/60 border border-offwhite/20">
-                                <span class="font-medium text-offwhite">German</span>
-                                <span class="px-3 py-1 rounded-full text-xs font-medium border border-offwhite/40 text-offwhite">Beginner - Intermediate</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================================================
-             PAGE 3: CONTACT PAGE
-             ========================================================= -->
-        <section id="page-contact" class="page-section">
-            <div class="max-w-2xl mx-auto py-8">
-                <div class="burgundy-card rounded-3xl p-8 sm:p-14 text-center">
-                    <div class="w-16 h-16 rounded-full bg-offwhite/15 border border-offwhite/35 flex items-center justify-center mx-auto mb-6">
-                        <i class="fa-regular fa-paper-plane text-2xl text-offwhite"></i>
-                    </div>
-                    <p class="text-xs uppercase tracking-[0.3em] text-offwhite/70 mb-2">Get in Touch</p>
-                    <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-offwhite mb-4">
-                        Contact
-                    </h1>
-                    <p class="text-sm sm:text-base text-offwhite/80 max-w-md mx-auto mb-10">
-                        Available for freelance commissions, 2D/3D character design projects, and creative collaborations.
-                    </p>
-
-                    <div class="space-y-5 text-left max-w-md mx-auto">
-                        <!-- Name Card -->
-                        <div class="p-5 rounded-2xl bg-burgundy/70 border border-offwhite/25 flex items-center gap-4">
-                            <div class="w-11 h-11 rounded-xl bg-offwhite text-burgundy flex items-center justify-center shrink-0">
-                                <i class="fa-regular fa-user text-lg"></i>
-                            </div>
-                            <div>
-                                <span class="text-xs uppercase tracking-widest text-offwhite/65 block">Artist Name</span>
-                                <span class="font-serif text-2xl font-semibold text-offwhite">Defne Artuner</span>
-                            </div>
-                        </div>
-
-                        <!-- Email Card -->
-                        <div class="p-5 rounded-2xl bg-burgundy/70 border border-offwhite/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-11 h-11 rounded-xl bg-offwhite text-burgundy flex items-center justify-center shrink-0">
-                                    <i class="fa-regular fa-envelope text-lg"></i>
-                                </div>
-                                <div class="overflow-hidden">
-                                    <span class="text-xs uppercase tracking-widest text-offwhite/65 block">Email Address</span>
-                                    <a href="mailto:defneartuner@gmail.com" class="font-medium text-base sm:text-lg text-offwhite hover:underline break-all">
-                                        defneartuner@gmail.com
-                                    </a>
-                                </div>
-                            </div>
-                            <button onclick="copyEmail()" class="px-4 py-2 rounded-xl border border-offwhite/35 hover:bg-offwhite hover:text-burgundy text-xs font-medium transition shrink-0 self-start sm:self-center">
-                                <i class="fa-regular fa-copy mr-1.5"></i>Copy
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Direct Mail Button -->
-                    <div class="mt-10">
-                        <a href="mailto:defneartuner@gmail.com" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-offwhite text-burgundy font-semibold text-sm sm:text-base hover:bg-offwhite/90 transition shadow-xl">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                            <span>Send an Email</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ================= FOOTER ================= -->
-    <footer class="border-t border-offwhite/20 bg-burgundy-deeper/60 py-6 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-offwhite/70 gap-3">
-            <p>&copy; 2025 Defne Artuner. All rights reserved.</p>
-            <p class="font-serif italic text-sm text-offwhite/85">3D Sculpting &amp; Character Design Portfolio</p>
-        </div>
-    </footer>
-
-    <!-- ================= MODAL: ADD PICTURE ================= -->
-    <div id="upload-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4">
-        <div class="burgundy-card bg-burgundy-dark w-full max-w-lg rounded-2xl p-6 sm:p-8 border border-offwhite/35 shadow-2xl relative">
-            <button onclick="closeUploadModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-offwhite/10 hover:bg-offwhite/25 flex items-center justify-center text-offwhite transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <span class="text-xs uppercase tracking-[0.25em] text-offwhite/70 block mb-1">Add Artwork</span>
-            <h3 id="modal-category-title" class="font-serif text-3xl font-semibold text-offwhite mb-6">Add to Category</h3>
-
-            <form id="upload-form" onsubmit="handleArtworkSubmit(event)" class="space-y-5">
-                <input type="hidden" id="upload-category-id">
-
-                <!-- Title Input -->
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-offwhite/80 mb-2">Artwork Title (Optional)</label>
-                    <input type="text" id="art-title-input" placeholder="e.g., Character Bust Study" class="w-full px-4 py-3 rounded-xl bg-burgundy/80 border border-offwhite/30 text-offwhite placeholder-offwhite/40 focus:outline-none focus:border-offwhite">
-                </div>
-
-                <!-- Local File Upload -->
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-offwhite/80 mb-2">Choose Image File(s) from Device</label>
-                    <label class="flex flex-col items-center justify-center w-full h-32 rounded-xl border-2 border-dashed border-offwhite/35 hover:border-offwhite bg-burgundy/50 cursor-pointer transition p-4 text-center">
-                        <i class="fa-solid fa-cloud-arrow-up text-2xl text-offwhite/80 mb-2"></i>
-                        <span id="file-chosen-label" class="text-sm text-offwhite/90 font-medium">Click to select image(s)</span>
-                        <span class="text-xs text-offwhite/60 mt-1">Supports PNG, JPG, WEBP, GIF</span>
-                        <input type="file" id="art-file-input" accept="image/*" multiple class="hidden" onchange="updateFileLabel()">
-                    </label>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <div class="h-px bg-offwhite/20 flex-grow"></div>
-                    <span class="text-xs uppercase tracking-widest text-offwhite/60">OR</span>
-                    <div class="h-px bg-offwhite/20 flex-grow"></div>
-                </div>
-
-                <!-- Direct Image URL Input -->
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-offwhite/80 mb-2">Paste Image URL</label>
-                    <input type="url" id="art-url-input" placeholder="https://example.com/artwork.jpg" class="w-full px-4 py-3 rounded-xl bg-burgundy/80 border border-offwhite/30 text-offwhite placeholder-offwhite/40 focus:outline-none focus:border-offwhite">
-                </div>
-
-                <div class="flex items-center justify-end gap-3 pt-3">
-                    <button type="button" onclick="closeUploadModal()" class="px-5 py-2.5 rounded-xl border border-offwhite/30 text-sm text-offwhite hover:bg-offwhite/10 transition">
-                        Cancel
-                    </button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-offwhite text-burgundy font-semibold text-sm hover:bg-offwhite/90 transition shadow-lg">
-                        Add to Gallery
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ================= MODAL: LIGHTBOX IMAGE VIEWER ================= -->
-    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md p-4" onclick="closeLightbox()">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-offwhite/15 hover:bg-offwhite text-offwhite hover:text-burgundy flex items-center justify-center transition text-lg">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="max-w-5xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
-            <img id="lightbox-img" src="" alt="Artwork Preview" class="max-h-[80vh] w-auto object-contain rounded-xl border border-offwhite/25 shadow-2xl">
-            <p id="lightbox-caption" class="font-serif text-2xl text-offwhite mt-4"></p>
-        </div>
-    </div>
-
-    <!-- ================= TOAST NOTIFICATION ================= -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-3 px-5 py-3.5 rounded-xl bg-offwhite text-burgundy font-medium text-sm shadow-2xl">
-        <i class="fa-solid fa-circle-check"></i>
-        <span id="toast-message">Action completed</span>
-    </div>
-
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
-    <script>
-        const STORAGE_KEY = 'defne_artuner_portfolio_v1';
-
-        // Default Starter Placeholders so the gallery looks curated out of the box
-        const defaultGalleryData = {
-            'freelance': [
-                {
-                    id: 'fl-1',
-                    title: 'Custom 2D Game Asset Commission',
-                    src: 'https://placehold.co/800x600/580015/FAF9F6?text=Freelance+2D+Asset'
-                }
-            ],
-            'traditional': [
-                {
-                    id: 'tr-1',
-                    title: 'Classical Clay Portrait Study',
-                    src: 'https://placehold.co/800x600/580015/FAF9F6?text=Traditional+Sculpture'
-                }
-            ],
-            '2d': [
-                {
-                    id: '2d-1',
-                    title: 'Character Expression & Psychology Sheet',
-                    src: 'https://placehold.co/800x600/580015/FAF9F6?text=2D+Character+Design'
-                }
-            ],
-            '3d': [
-                {
-                    id: '3d-1',
-                    title: '3D Digital Character Sculpt',
-                    src: 'https://placehold.co/800x600/580015/FAF9F6?text=3D+Digital+Sculpt'
-                }
-            ]
-        };
-
-        let galleryState = {};
-
-        // Load saved images from localStorage or fallback to default
-        function loadGalleryState() {
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (saved) {
-                    galleryState = JSON.parse(saved);
-                } else {
-                    galleryState = JSON.parse(JSON.stringify(defaultGalleryData));
-                }
-            } catch (e) {
-                galleryState = JSON.parse(JSON.stringify(defaultGalleryData));
-            }
-            renderAllCategories();
-        }
-
-        function saveGalleryState() {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(galleryState));
-            } catch (err) {
-                showToast('Storage limit reached for local browser cache.');
-            }
-        }
-
-        // Render all 4 category grids
-        function renderAllCategories() {
-            ['freelance', 'traditional', '2d', '3d'].forEach(cat => {
-                const container = document.getElementById(`grid-${cat}`);
-                if (!container) return;
-                const items = galleryState[cat] || [];
-
-                if (items.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-span-full burgundy-card rounded-2xl p-10 text-center border-dashed border-offwhite/30">
-                            <i class="fa-regular fa-images text-3xl text-offwhite/50 mb-3"></i>
-                            <p class="font-serif text-xl text-offwhite/85">No pictures in this category yet</p>
-                            <p class="text-xs text-offwhite/60 mt-1">Click "+ Add Picture" above to upload your artwork.</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                container.innerHTML = items.map(item => `
-                    <div class="art-card burgundy-card rounded-2xl overflow-hidden flex flex-col justify-between group">
-                        <div class="art-image-wrapper relative aspect-[4/3] bg-burgundy-deeper overflow-hidden cursor-pointer"
-                             onclick="openLightbox('${item.id}', '${cat}')">
-                            <img src="${item.src}"
-                                 alt="${escapeHtml(item.title || 'Artwork')}"
-                                 onerror="this.src='https://placehold.co/800x600/580015/FAF9F6?text=Artwork+Preview'"
-                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                <span class="px-3.5 py-1.5 rounded-full bg-offwhite text-burgundy text-xs font-semibold shadow">
-                                    <i class="fa-solid fa-magnifying-glass-plus mr-1"></i>View Full
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-4 flex items-center justify-between gap-3">
-                            <h3 class="font-serif text-lg font-medium text-offwhite truncate">
-                                ${escapeHtml(item.title || 'Untitled Piece')}
-                            </h3>
-                            <button onclick="deleteArtwork('${cat}', '${item.id}')"
-                                    title="Remove picture"
-                                    class="w-8 h-8 rounded-lg border border-offwhite/20 hover:bg-offwhite hover:text-burgundy text-offwhite/75 flex items-center justify-center transition shrink-0">
-                                <i class="fa-regular fa-trash-can text-xs"></i>
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
-            });
-        }
-
-        // Escape HTML helper
-        function escapeHtml(str) {
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-        }
-
-        // SPA Page Switching
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            const targetSection = document.getElementById(`page-${pageId}`);
-            const targetNav = document.getElementById(`nav-${pageId}`);
-            if (targetSection) targetSection.classList.add('active');
-            if (targetNav) targetNav.classList.add('active');
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Upload Modal Controls
-        function openUploadModal(categoryId, categoryName) {
-            document.getElementById('upload-category-id').value = categoryId;
-            document.getElementById('modal-category-title').textContent = `Add to ${categoryName}`;
-            document.getElementById('art-title-input').value = '';
-            document.getElementById('art-file-input').value = '';
-            document.getElementById('art-url-input').value = '';
-            document.getElementById('file-chosen-label').textContent = 'Click to select image(s)';
-
-            const modal = document.getElementById('upload-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeUploadModal() {
-            const modal = document.getElementById('upload-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function updateFileLabel() {
-            const fileInput = document.getElementById('art-file-input');
-            const label = document.getElementById('file-chosen-label');
-            if (fileInput.files && fileInput.files.length > 0) {
-                label.textContent = fileInput.files.length === 1
-                    ? fileInput.files[0].name
-                    : `${fileInput.files.length} files selected`;
-            } else {
-                label.textContent = 'Click to select image(s)';
-            }
-        }
-
-        // Handle Adding Pictures (Local File Reader or Image URL)
-        function handleArtworkSubmit(e) {
-            e.preventDefault();
-            const categoryId = document.getElementById('upload-category-id').value;
-            const titleInput = document.getElementById('art-title-input').value.trim();
-            const fileInput = document.getElementById('art-file-input');
-            const urlInput = document.getElementById('art-url-input').value.trim();
-
-            if (!galleryState[categoryId]) {
-                galleryState[categoryId] = [];
-            }
-
-            // Case 1: Files uploaded from computer/phone
-            if (fileInput.files && fileInput.files.length > 0) {
-                const files = Array.from(fileInput.files);
-                let processed = 0;
-
-                files.forEach((file, idx) => {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const itemTitle = titleInput
-                            ? (files.length > 1 ? `${titleInput} (${idx + 1})` : titleInput)
-                            : file.name.replace(/\.[^/.]+$/, "");
-
-                        galleryState[categoryId].unshift({
-                            id: 'art-' + Date.now() + '-' + idx,
-                            title: itemTitle,
-                            src: event.target.result
-                        });
-
-                        processed++;
-                        if (processed === files.length) {
-                            saveGalleryState();
-                            renderAllCategories();
-                            closeUploadModal();
-                            showToast('Picture(s) added to gallery!');
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                });
-                return;
-            }
-
-            // Case 2: Direct Image URL provided
-            if (urlInput) {
-                galleryState[categoryId].unshift({
-                    id: 'art-' + Date.now(),
-                    title: titleInput || 'Artwork Piece',
-                    src: urlInput
-                });
-                saveGalleryState();
-                renderAllCategories();
-                closeUploadModal();
-                showToast('Picture added to gallery!');
-                return;
-            }
-
-            showToast('Please select an image file or paste an image URL.');
-        }
-
-        // Delete Artwork
-        function deleteArtwork(categoryId, itemId) {
-            if (!galleryState[categoryId]) return;
-            galleryState[categoryId] = galleryState[categoryId].filter(item => item.id !== itemId);
-            saveGalleryState();
-            renderAllCategories();
-            showToast('Picture removed.');
-        }
-
-        // Lightbox Preview
-        function openLightbox(itemId, categoryId) {
-            const item = (galleryState[categoryId] || []).find(i => i.id === itemId);
-            if (!item) return;
-            document.getElementById('lightbox-img').src = item.src;
-            document.getElementById('lightbox-caption').textContent = item.title || '';
-            const modal = document.getElementById('lightbox-modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeLightbox() {
-            const modal = document.getElementById('lightbox-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Copy Email to Clipboard
-        function copyEmail() {
-            const email = 'defneartuner@gmail.com';
-            const tempInput = document.createElement('textarea');
-            tempInput.value = email;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            showToast('Email copied: defneartuner@gmail.com');
-        }
-
-        // Toast Feedback
-        let toastTimeout;
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').textContent = message;
-            toast.classList.remove('hidden');
-            toast.classList.add('flex');
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.add('hidden');
-                toast.classList.remove('flex');
-            }, 3000);
-        }
-
-        // Initialize on page load
-        window.addEventListener('DOMContentLoaded', loadGalleryState);
-    </script>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="text-scale" content="scale" />
+		<!--12qhfyh--><meta name="theme-color" content="#6f0e15"/> <link rel="preconnect" href="https://fonts.googleapis.com"/> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/> <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Syne:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><!----><!--1uha8ag--><meta name="description" content="The portfolio of Defne Artuner, a 3D artist focused on sculpting and character design."/><!----><title>Defne Artuner | Artist Portfolio</title>
+		<style data-sveltekit>
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		background: #6f0e15;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+		background: #6f0e15;
+		color: #f6efe7;
+		font-family: 'DM Sans', sans-serif;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	button,
+	input {
+		font: inherit;
+	}
+
+	::selection {
+		background: #f6efe7;
+		color: #430012;
+	}
+
+	.site-shell.svelte-12qhfyh {
+		width: min(100% - 88px, 1440px);
+		margin: 0 auto;
+	}
+
+	.site-header.svelte-12qhfyh {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-items: center;
+		min-height: 92px;
+		border-bottom: 1px solid rgb(246 239 231 / 22%);
+	}
+
+	.wordmark.svelte-12qhfyh {
+		width: fit-content;
+		font-family: 'Playfair Display', Georgia, serif;
+		font-size: 29px;
+		font-weight: 700;
+		letter-spacing: 0;
+	}
+
+	.wordmark.svelte-12qhfyh span:where(.svelte-12qhfyh) {
+		color: #f6efe7;
+	}
+
+	nav.svelte-12qhfyh {
+		display: flex;
+		justify-content: center;
+		gap: 38px;
+		font-size: 12px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	nav.svelte-12qhfyh a:where(.svelte-12qhfyh),
+	.site-footer.svelte-12qhfyh a:where(.svelte-12qhfyh) {
+		transition: color 180ms ease;
+	}
+
+	nav.svelte-12qhfyh a:where(.svelte-12qhfyh):hover,
+	.site-footer.svelte-12qhfyh a:where(.svelte-12qhfyh):hover {
+		color: #f6efe7;
+	}
+
+	.site-footer.svelte-12qhfyh {
+		display: flex;
+		justify-content: space-between;
+		gap: 18px;
+		padding: 24px 0 28px;
+		border-top: 1px solid rgb(246 239 231 / 22%);
+		color: rgb(246 239 231 / 68%);
+		font-size: 11px;
+	}
+
+	@media (max-width: 640px) {
+		.site-shell.svelte-12qhfyh {
+			width: min(100% - 40px, 1440px);
+		}
+
+		.site-header.svelte-12qhfyh {
+			grid-template-columns: auto 1fr;
+			min-height: 76px;
+		}
+
+		nav.svelte-12qhfyh {
+			justify-content: end;
+			gap: 18px;
+			font-size: 10px;
+		}
+
+		.site-footer.svelte-12qhfyh {
+			flex-wrap: wrap;
+			font-size: 10px;
+		}
+	}
+
+	body {
+		--burgundy: #6f0e15;
+		--paper: #f6efe7;
+		--accent: #f6efe7;
+		--line: rgb(246 239 231 / 24%);
+		font-family: 'DM Sans', sans-serif;
+	}
+
+	.site-shell.svelte-12qhfyh {
+		width: min(100% - 104px, 1480px);
+	}
+
+	.site-header.svelte-12qhfyh {
+		grid-template-columns: 1fr 0.8fr 1.4fr;
+		min-height: 88px;
+		border-bottom-color: var(--line);
+	}
+
+	.wordmark.svelte-12qhfyh {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		font-family: 'Syne', sans-serif;
+	}
+
+	.wordmark-mark.svelte-12qhfyh {
+		display: grid;
+		width: 39px;
+		height: 39px;
+		place-items: center;
+		border: 1px solid var(--accent);
+		color: var(--accent);
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	.wordmark-name.svelte-12qhfyh {
+		font-size: 13px;
+		font-weight: 600;
+	}
+
+	.header-note.svelte-12qhfyh {
+		margin: 0;
+		color: var(--paper);
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		line-height: 1.7;
+		text-transform: uppercase;
+	}
+
+	.header-note.svelte-12qhfyh span:where(.svelte-12qhfyh) {
+		display: block;
+		color: rgb(246 239 231 / 54%);
+	}
+
+	nav.svelte-12qhfyh {
+		justify-content: flex-end;
+		gap: clamp(18px, 3vw, 42px);
+		font-family: 'DM Mono', monospace;
+		font-size: 10px;
+		letter-spacing: 0;
+	}
+
+	nav.svelte-12qhfyh a:where(.svelte-12qhfyh) {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	nav.svelte-12qhfyh a:where(.svelte-12qhfyh) span:where(.svelte-12qhfyh) {
+		color: var(--accent);
+		font-size: 9px;
+	}
+
+	.site-footer.svelte-12qhfyh {
+		align-items: center;
+		border-top-color: var(--line);
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	.site-footer.svelte-12qhfyh a:where(.svelte-12qhfyh) span:where(.svelte-12qhfyh) {
+		margin-left: 7px;
+		color: var(--accent);
+	}
+
+	@media (max-width: 760px) {
+		.site-shell.svelte-12qhfyh {
+			width: min(100% - 40px, 1480px);
+		}
+
+		.site-header.svelte-12qhfyh {
+			grid-template-columns: 1fr auto;
+			row-gap: 0;
+			min-height: 76px;
+		}
+
+		.header-note.svelte-12qhfyh {
+			display: none;
+		}
+
+		nav.svelte-12qhfyh {
+			gap: 14px;
+			font-size: 9px;
+		}
+
+		nav.svelte-12qhfyh a:where(.svelte-12qhfyh) {
+			gap: 4px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.wordmark.svelte-12qhfyh {
+			gap: 8px;
+		}
+
+		.wordmark-mark.svelte-12qhfyh {
+			width: 33px;
+			height: 33px;
+		}
+
+		.wordmark-name.svelte-12qhfyh {
+			font-size: 11px;
+		}
+
+		nav.svelte-12qhfyh {
+			gap: 10px;
+			font-size: 8px;
+		}
+
+		nav.svelte-12qhfyh a:where(.svelte-12qhfyh) span:where(.svelte-12qhfyh) {
+			display: none;
+		}
+
+		.site-footer.svelte-12qhfyh {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+ .svelte-12qhfyh{}
+
+	.intro.svelte-1uha8ag {
+		display: flex;
+		min-height: min(720px, calc(100svh - 88px));
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 24px 5% 0;
+	}
+
+	.hero-meta.svelte-1uha8ag,
+	.hero-footer.svelte-1uha8ag {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	.hero-meta.svelte-1uha8ag {
+		min-height: 35px;
+		color: rgb(246 239 231 / 67%);
+	}
+
+	.hero-body.svelte-1uha8ag {
+		display: grid;
+		flex: 1;
+		grid-template-columns: minmax(0, 1fr) minmax(180px, 0.28fr);
+		align-items: end;
+		gap: 5%;
+		padding: 53px 0 45px;
+	}
+
+	.hero-title.svelte-1uha8ag {
+		animation: svelte-1uha8ag-rise-in 650ms ease both;
+	}
+
+	.hero-aside.svelte-1uha8ag {
+		animation: svelte-1uha8ag-rise-in 650ms 120ms ease both;
+	}
+
+	.hero-kicker.svelte-1uha8ag,
+	.aside-index.svelte-1uha8ag {
+		margin: 0;
+		font-family: 'DM Mono', monospace;
+		font-size: 10px;
+		line-height: 1.8;
+		text-transform: uppercase;
+	}
+
+	.hero-kicker.svelte-1uha8ag {
+		margin: 0 0 34px 7px;
+		color: #f6efe7;
+	}
+
+	.hero-kicker.svelte-1uha8ag span:where(.svelte-1uha8ag) {
+		padding: 0 5px;
+		color: #f6efe7;
+	}
+
+	h1.svelte-1uha8ag {
+		margin: 0;
+		font-family: 'Syne', sans-serif;
+		font-size: clamp(94px, 17vw, 240px);
+		font-weight: 600;
+		line-height: 0.78;
+		letter-spacing: 0;
+	}
+
+	h1.svelte-1uha8ag em:where(.svelte-1uha8ag) {
+		color: #f6efe7;
+		font-style: normal;
+		font-weight: 500;
+	}
+
+	.intro-description.svelte-1uha8ag {
+		max-width: 230px;
+		margin: 26px 0 28px;
+		color: rgb(246 239 231 / 75%);
+		font-size: 13px;
+		line-height: 1.75;
+	}
+
+	.aside-index.svelte-1uha8ag {
+		color: #f6efe7;
+	}
+
+	.hero-link.svelte-1uha8ag {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 12px 0;
+		border-top: 1px solid rgb(246 239 231 / 40%);
+		border-bottom: 1px solid rgb(246 239 231 / 40%);
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		text-transform: uppercase;
+		transition:
+			color 180ms ease,
+			padding 180ms ease;
+	}
+
+	.hero-link.svelte-1uha8ag:hover {
+		padding-right: 7px;
+		color: #f6efe7;
+	}
+
+	.hero-link.svelte-1uha8ag span:where(.svelte-1uha8ag):last-child {
+		color: #f6efe7;
+		font-size: 16px;
+	}
+
+	.hero-footer.svelte-1uha8ag {
+		min-height: 45px;
+		border-top: 1px solid rgb(246 239 231 / 24%);
+		color: rgb(246 239 231 / 62%);
+	}
+
+	.hero-footer.svelte-1uha8ag a:where(.svelte-1uha8ag) {
+		color: #f6efe7;
+	}
+
+	.hero-footer.svelte-1uha8ag a:where(.svelte-1uha8ag) span:where(.svelte-1uha8ag) {
+		margin-left: 8px;
+		color: #f6efe7;
+		font-size: 14px;
+	}
+
+	.work-section.svelte-1uha8ag {
+		padding: 67px 5% 105px;
+		border-top: 1px solid rgb(246 239 231 / 22%);
+	}
+
+	.section-heading.svelte-1uha8ag {
+		display: grid;
+		grid-template-columns: 0.62fr 1fr;
+		align-items: end;
+		gap: 7%;
+		margin-bottom: 18px;
+		padding-bottom: 35px;
+		border-bottom: 1px solid rgb(246 239 231 / 28%);
+	}
+
+	.eyebrow.svelte-1uha8ag {
+		margin: 0 0 15px;
+		color: #f6efe7;
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	.eyebrow.svelte-1uha8ag span:where(.svelte-1uha8ag) {
+		margin-right: 10px;
+		color: rgb(246 239 231 / 62%);
+	}
+
+	h2.svelte-1uha8ag,
+	h3.svelte-1uha8ag {
+		font-family: 'Syne', sans-serif;
+		font-weight: 500;
+	}
+
+	h2.svelte-1uha8ag {
+		margin: 0;
+		font-size: clamp(47px, 6vw, 78px);
+		line-height: 0.98;
+		letter-spacing: 0;
+	}
+
+	h2.svelte-1uha8ag em:where(.svelte-1uha8ag) {
+		color: #f6efe7;
+		font-style: normal;
+		font-weight: 500;
+	}
+
+	.work-note.svelte-1uha8ag {
+		max-width: 250px;
+		margin: 0 0 5px auto;
+		color: rgb(246 239 231 / 67%);
+		font-size: 13px;
+		line-height: 1.8;
+	}
+
+	.category-grid.svelte-1uha8ag {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.category.svelte-1uha8ag {
+		min-width: 0;
+	}
+
+	.category-heading.svelte-1uha8ag {
+		display: flex;
+		min-height: 0;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 13px;
+		padding: 0;
+		border: 0;
+	}
+
+	.category-number.svelte-1uha8ag {
+		margin: 2px 0 0;
+		color: #f6efe7;
+		font-family: 'DM Mono', monospace;
+		font-size: 10px;
+	}
+
+	.category-number.svelte-1uha8ag span:where(.svelte-1uha8ag) {
+		color: rgb(246 239 231 / 42%);
+	}
+
+	.category-title.svelte-1uha8ag {
+		margin-bottom: 7px;
+	}
+
+	h3.svelte-1uha8ag {
+		margin: 0;
+		font-size: clamp(23px, 2.4vw, 31px);
+		line-height: 1.1;
+		letter-spacing: 0;
+	}
+
+	.category-note.svelte-1uha8ag {
+		margin: 6px 0 0;
+		color: rgb(246 239 231 / 62%);
+		font-size: 10px;
+	}
+
+	.category-count.svelte-1uha8ag {
+		margin: auto 0 0;
+		color: rgb(246 239 231 / 51%);
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		text-transform: uppercase;
+	}
+
+	.artwork-grid.svelte-1uha8ag {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.empty-art.svelte-1uha8ag {
+		display: flex;
+		min-height: 190px;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+		padding: 15px;
+		border: 1px solid rgb(246 239 231 / 17%);
+		background: rgb(57 0 17 / 16%);
+		color: rgb(246 239 231 / 54%);
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		text-transform: uppercase;
+	}
+
+	.empty-mark.svelte-1uha8ag {
+		color: #f6efe7;
+		font-family: 'Syne', sans-serif;
+		font-size: 34px;
+		line-height: 1;
+	}
+
+	.artwork.svelte-1uha8ag {
+		position: relative;
+		min-width: 0;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: #550016;
+		cursor: pointer;
+		overflow: hidden;
+		text-align: left;
+	}
+
+	.artwork.svelte-1uha8ag img:where(.svelte-1uha8ag) {
+		display: block;
+		width: 100%;
+		aspect-ratio: 0.92;
+		object-fit: cover;
+		transition: transform 300ms ease;
+	}
+
+	.artwork.svelte-1uha8ag:hover img:where(.svelte-1uha8ag) {
+		transform: scale(1.035);
+	}
+
+	.artwork-label.svelte-1uha8ag {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		padding: 9px 1px;
+		font-family: 'DM Mono', monospace;
+		font-size: 9px;
+		text-transform: uppercase;
+		color: inherit;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.lightbox.svelte-1uha8ag {
+		position: fixed;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		padding: 32px;
+		background: rgb(15 5 8 / 78%);
+		z-index: 40;
+	}
+
+	.lightbox-panel.svelte-1uha8ag {
+		position: relative;
+		max-width: min(90vw, 1100px);
+		max-height: 86vh;
+		padding: 24px 24px 18px;
+		background: #1d070b;
+		border: 1px solid rgb(246 239 231 / 18%);
+		box-shadow: 0 24px 80px rgb(0 0 0 / 38%);
+	}
+
+	.lightbox-image-button.svelte-1uha8ag {
+		display: block;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		cursor: default;
+	}
+
+	.lightbox-image-button.svelte-1uha8ag img:where(.svelte-1uha8ag) {
+		display: block;
+		max-width: 100%;
+		max-height: 74vh;
+		object-fit: contain;
+	}
+
+	.lightbox-panel.svelte-1uha8ag p:where(.svelte-1uha8ag) {
+		margin: 12px 0 0;
+		color: #f6efe7;
+		font-family: 'DM Mono', monospace;
+		font-size: 10px;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.close-button.svelte-1uha8ag {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		border: 0;
+		background: transparent;
+		color: #f6efe7;
+		font-size: 28px;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	@keyframes svelte-1uha8ag-rise-in {
+		from {
+			opacity: 0;
+			transform: translateY(15px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.hero-body.svelte-1uha8ag {
+			grid-template-columns: minmax(0, 1fr) minmax(165px, 0.3fr);
+			gap: 3%;
+		}
+
+		h1.svelte-1uha8ag {
+			font-size: clamp(90px, 16vw, 160px);
+		}
+
+		.category.svelte-1uha8ag {
+			grid-template-columns: 150px minmax(0, 1fr);
+			gap: 22px;
+		}
+
+		.artwork-grid.svelte-1uha8ag {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 620px) {
+		.intro.svelte-1uha8ag {
+			min-height: calc(83svh - 76px);
+			padding: 17px 0 0;
+		}
+
+		.hero-meta.svelte-1uha8ag,
+		.hero-footer.svelte-1uha8ag {
+			font-size: 8px;
+		}
+
+		.hero-body.svelte-1uha8ag {
+			grid-template-columns: 1fr;
+			align-content: center;
+			gap: 39px;
+			padding: 58px 0;
+		}
+
+		.hero-kicker.svelte-1uha8ag {
+			margin: 0 0 29px 3px;
+			font-size: 8px;
+		}
+
+		h1.svelte-1uha8ag {
+			font-size: clamp(84px, 19vw, 128px);
+		}
+
+		.hero-aside.svelte-1uha8ag {
+			width: min(75%, 280px);
+			justify-self: end;
+		}
+
+		.intro-description.svelte-1uha8ag {
+			margin: 13px 0 19px;
+			font-size: 12px;
+		}
+
+		.work-section.svelte-1uha8ag {
+			padding: 47px 0 70px;
+		}
+
+		.section-heading.svelte-1uha8ag {
+			grid-template-columns: 1fr;
+			gap: 20px;
+			padding-bottom: 25px;
+		}
+
+		h2.svelte-1uha8ag {
+			font-size: clamp(48px, 12vw, 68px);
+		}
+
+		.work-note.svelte-1uha8ag {
+			margin: 0;
+			font-size: 11px;
+		}
+
+		.category.svelte-1uha8ag {
+			grid-template-columns: 1fr;
+			gap: 18px;
+			padding: 24px 0;
+		}
+
+		.category-heading.svelte-1uha8ag {
+			display: grid;
+			grid-template-columns: 40px 1fr auto;
+			align-items: start;
+			gap: 10px;
+		}
+
+		.category-count.svelte-1uha8ag {
+			align-self: center;
+			text-align: right;
+		}
+
+		.artwork-grid.svelte-1uha8ag {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 9px;
+		}
+
+		.empty-art.svelte-1uha8ag {
+			min-height: 150px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-title.svelte-1uha8ag,
+		.hero-aside.svelte-1uha8ag {
+			animation: none;
+		}
+	}
+ .svelte-1uha8ag{}</style>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><div class="site-shell svelte-12qhfyh"><header class="site-header svelte-12qhfyh"><a class="wordmark svelte-12qhfyh" href="./index.html" aria-label="Defne Artuner home"><span class="wordmark-mark svelte-12qhfyh">DA</span> <span class="wordmark-name svelte-12qhfyh">Defne Artuner</span></a> <p class="header-note svelte-12qhfyh">Artist portfolio <span class="svelte-12qhfyh">Ankara, Türkiye</span></p> <nav aria-label="Main navigation" class="svelte-12qhfyh"><a href="./index.html" class="svelte-12qhfyh"><span class="svelte-12qhfyh">01</span> Work</a> <a href="./about.html" class="svelte-12qhfyh"><span class="svelte-12qhfyh">02</span> About</a> <a href="./contact.html" class="svelte-12qhfyh"><span class="svelte-12qhfyh">03</span> Contact</a></nav></header> <main class="svelte-12qhfyh"><!--[--><!--[-1--><!--[--><section class="intro svelte-1uha8ag"><div class="hero-meta svelte-1uha8ag"><span class="svelte-1uha8ag">Independent practice / 2026</span> <span class="svelte-1uha8ag">39°55' N · 32°51' E</span></div> <div class="hero-body svelte-1uha8ag"><div class="hero-title svelte-1uha8ag"><p class="hero-kicker svelte-1uha8ag">3D artist <span class="svelte-1uha8ag">·</span> character design</p> <h1 class="svelte-1uha8ag">Defne<br class="svelte-1uha8ag"/><em class="svelte-1uha8ag">Artuner</em></h1></div> <div class="hero-aside svelte-1uha8ag"><p class="aside-index svelte-1uha8ag">01 / 04<br class="svelte-1uha8ag"/>Portfolio index</p> <p class="intro-description svelte-1uha8ag">Character, form and the small human details that stay with us.</p> <a class="hero-link svelte-1uha8ag" href="#work"><span class="svelte-1uha8ag">Explore selected work</span><span class="svelte-1uha8ag">↘</span></a></div></div> <div class="hero-footer svelte-1uha8ag"><span class="svelte-1uha8ag">Form / character / emotion</span> <a href="#work" class="svelte-1uha8ag">Scroll to explore <span class="svelte-1uha8ag">↓</span></a></div></section> <section class="work-section svelte-1uha8ag" id="work" aria-labelledby="work-heading"><div class="section-heading svelte-1uha8ag"><div class="svelte-1uha8ag"><p class="eyebrow svelte-1uha8ag"><span class="svelte-1uha8ag">02</span> Project index</p> <h2 id="work-heading" class="svelte-1uha8ag">Selected<br class="svelte-1uha8ag"/><em class="svelte-1uha8ag">work.</em></h2></div> <p class="work-note svelte-1uha8ag">Four ways into the practice.<br class="svelte-1uha8ag"/>A growing archive of ideas made tangible.</p></div> <div class="category-grid svelte-1uha8ag"><!--[--><section class="category svelte-1uha8ag" aria-labelledby="category-freelance"><div class="category-heading svelte-1uha8ag"><p class="category-number svelte-1uha8ag">01<span class="svelte-1uha8ag">/ 04</span></p> <div class="category-title svelte-1uha8ag"><h3 id="category-freelance" class="svelte-1uha8ag">Freelance</h3> <p class="category-note svelte-1uha8ag">Selected commissions</p></div> <p class="category-count svelte-1uha8ag">2 works</p></div> <div class="artwork-grid svelte-1uha8ag"><!--[--><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/freelance/Freelance.PNG" alt="Freelance.PNG" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">Freelance.PNG</span></button><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/freelance/warcrimes.co.PNG" alt="warcrimes.co.PNG" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">warcrimes.co.PNG</span></button><!--]--></div></section><section class="category svelte-1uha8ag" aria-labelledby="category-traditional"><div class="category-heading svelte-1uha8ag"><p class="category-number svelte-1uha8ag">02<span class="svelte-1uha8ag">/ 04</span></p> <div class="category-title svelte-1uha8ag"><h3 id="category-traditional" class="svelte-1uha8ag">Traditional</h3> <p class="category-note svelte-1uha8ag">Studies in material</p></div> <p class="category-count svelte-1uha8ag">2 works</p></div> <div class="artwork-grid svelte-1uha8ag"><!--[--><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/traditional/Alexander.png" alt="Alexander.png" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">Alexander.png</span></button><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/traditional/male%20sketch.png" alt="male sketch.png" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">male sketch.png</span></button><!--]--></div></section><section class="category svelte-1uha8ag" aria-labelledby="category-2d-designs"><div class="category-heading svelte-1uha8ag"><p class="category-number svelte-1uha8ag">03<span class="svelte-1uha8ag">/ 04</span></p> <div class="category-title svelte-1uha8ag"><h3 id="category-2d-designs" class="svelte-1uha8ag">2D Designs</h3> <p class="category-note svelte-1uha8ag">Characters &amp; worlds</p></div> <p class="category-count svelte-1uha8ag">3 works</p></div> <div class="artwork-grid svelte-1uha8ag"><!--[--><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/2d-designs/death.png" alt="death.png" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">death.png</span></button><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/2d-designs/self%20portrait.png" alt="self portrait.png" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">self portrait.png</span></button><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/2d-designs/thewolf.png" alt="thewolf.png" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">thewolf.png</span></button><!--]--></div></section><section class="category svelte-1uha8ag" aria-labelledby="category-3d-designs"><div class="category-heading svelte-1uha8ag"><p class="category-number svelte-1uha8ag">04<span class="svelte-1uha8ag">/ 04</span></p> <div class="category-title svelte-1uha8ag"><h3 id="category-3d-designs" class="svelte-1uha8ag">3D Designs</h3> <p class="category-note svelte-1uha8ag">Sculpture &amp; form</p></div> <p class="category-count svelte-1uha8ag">1 works</p></div> <div class="artwork-grid svelte-1uha8ag"><!--[--><button type="button" class="artwork svelte-1uha8ag"><img src="./assets/3d-designs/sculpting1.PNG" alt="sculpting1.PNG" class="svelte-1uha8ag"/> <span class="artwork-label svelte-1uha8ag">sculpting1.PNG</span></button><!--]--></div></section><!--]--></div></section> <!--[-1--><!--]--><!--]--><!--]--><!--]--><!----></main> <footer class="site-footer svelte-12qhfyh"><span class="svelte-12qhfyh">© 2026 · Defne Artuner</span> <span class="svelte-12qhfyh">Form / character / emotion</span> <a href="mailto:defneartuner@gmail.com" class="svelte-12qhfyh">Start a conversation <span class="svelte-12qhfyh">↗</span></a></footer></div><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
+			
+			
+		</div>
+	
+<style>
+.static-lightbox{position:fixed;inset:0;display:grid;place-items:center;padding:32px;background:rgb(15 5 8 / 78%);z-index:40}
+.static-lightbox-panel{position:relative;max-width:min(90vw,1100px);max-height:86vh;padding:24px 24px 18px;background:#1d070b;border:1px solid rgb(246 239 231 / 18%);box-shadow:0 24px 80px rgb(0 0 0 / 38%)}
+.static-lightbox-panel img{display:block;max-width:100%;max-height:74vh;object-fit:contain}
+.static-lightbox-panel p{margin:12px 0 0;color:#f6efe7;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase}
+.static-lightbox-close{position:absolute;top:10px;right:10px;border:0;background:transparent;color:#f6efe7;font-size:28px;line-height:1;cursor:pointer}
+</style>
+<script>
+(() => {
+  let dialog;
+  const close = () => { dialog?.remove(); dialog = undefined; };
+  document.addEventListener('click', (event) => {
+    const artwork = event.target.closest('.artwork');
+    if (artwork) {
+      const image = artwork.querySelector('img');
+      if (!image) return;
+      close();
+      dialog = document.createElement('div');
+      dialog.className = 'static-lightbox';
+      dialog.setAttribute('role', 'dialog');
+      dialog.setAttribute('aria-modal', 'true');
+      dialog.setAttribute('aria-label', image.alt);
+      const panel = document.createElement('div');
+      panel.className = 'static-lightbox-panel';
+      const closeButton = document.createElement('button');
+      closeButton.className = 'static-lightbox-close';
+      closeButton.type = 'button';
+      closeButton.setAttribute('aria-label', 'Close image');
+      closeButton.textContent = '?';
+      closeButton.addEventListener('click', close);
+      const preview = document.createElement('img');
+      preview.src = image.src;
+      preview.alt = image.alt;
+      const caption = document.createElement('p');
+      caption.textContent = image.alt;
+      panel.append(closeButton, preview, caption);
+      dialog.append(panel);
+      dialog.addEventListener('click', (clickEvent) => { if (clickEvent.target === dialog) close(); });
+      document.body.append(dialog);
+      closeButton.focus();
+      return;
+    }
+    if (event.target.classList.contains('static-lightbox')) close();
+  });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
+})();
+</script>
 </body>
 </html>

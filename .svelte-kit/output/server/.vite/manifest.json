@@ -1,0 +1,205 @@
+{
+  ".svelte-kit/generated/build/env/config.js": {
+    "file": "env.js",
+    "name": "env",
+    "src": ".svelte-kit/generated/build/env/config.js",
+    "isEntry": true
+  },
+  "_internal.js": {
+    "file": "chunks/internal.js",
+    "name": "internal",
+    "imports": [
+      "_server-errors.js"
+    ]
+  },
+  "_male sketch.js": {
+    "file": "chunks/male sketch.js",
+    "name": "male sketch",
+    "assets": [
+      "_app/immutable/assets/20250107_093018.DhsDBB_Q.png",
+      "_app/immutable/assets/20250114_145241.Dg9vG-fM.png",
+      "_app/immutable/assets/Alexander.CBGluIu6.png",
+      "_app/immutable/assets/kayra_bust.CVoTgbbM.png",
+      "_app/immutable/assets/male sketch.vPXKjz0G.png"
+    ]
+  },
+  "_server-errors.js": {
+    "file": "chunks/server-errors.js",
+    "name": "server-errors"
+  },
+  "_server.js": {
+    "file": "chunks/server.js",
+    "name": "server"
+  },
+  "_server2.js": {
+    "file": "chunks/server2.js",
+    "name": "server"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/app/server/remote/index.js": {
+    "file": "remote-entry.js",
+    "name": "remote-entry",
+    "src": "node_modules/@sveltejs/kit/src/runtime/app/server/remote/index.js",
+    "isEntry": true,
+    "imports": [
+      "_server.js",
+      "_internal.js",
+      "_server-errors.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "name": "entries/fallbacks/error.svelte",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_server-errors.js",
+      "_server2.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "name": "index",
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js",
+    "isEntry": true,
+    "imports": [
+      "_server.js",
+      "_internal.js"
+    ],
+    "dynamicImports": [
+      "node_modules/@sveltejs/kit/src/runtime/server/instance.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/instance.js": {
+    "file": "chunks/instance.js",
+    "name": "instance",
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/instance.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_internal.js",
+      "_server-errors.js",
+      ".svelte-kit/generated/build/env/config.js",
+      "_server2.js"
+    ]
+  },
+  "src/lib/assets/artworks/2d-designs/death.png": {
+    "file": "_app/immutable/assets/death.D2qj58CJ.png",
+    "src": "src/lib/assets/artworks/2d-designs/death.png"
+  },
+  "src/lib/assets/artworks/2d-designs/self portrait.png": {
+    "file": "_app/immutable/assets/self portrait.CTFtIpn8.png",
+    "src": "src/lib/assets/artworks/2d-designs/self portrait.png"
+  },
+  "src/lib/assets/artworks/2d-designs/thewolf.png": {
+    "file": "_app/immutable/assets/thewolf.Bu-lPywE.png",
+    "src": "src/lib/assets/artworks/2d-designs/thewolf.png"
+  },
+  "src/lib/assets/artworks/3d-designs/sculpting1.PNG": {
+    "file": "_app/immutable/assets/sculpting1.CDJXnGss.PNG",
+    "src": "src/lib/assets/artworks/3d-designs/sculpting1.PNG"
+  },
+  "src/lib/assets/artworks/freelance/Freelance.PNG": {
+    "file": "_app/immutable/assets/Freelance.IJhd5KzV.PNG",
+    "src": "src/lib/assets/artworks/freelance/Freelance.PNG"
+  },
+  "src/lib/assets/artworks/freelance/warcrimes.co.PNG": {
+    "file": "_app/immutable/assets/warcrimes.co.DC2oFZ-H.PNG",
+    "src": "src/lib/assets/artworks/freelance/warcrimes.co.PNG"
+  },
+  "src/lib/assets/artworks/traditional/20250107_093018.png": {
+    "file": "_app/immutable/assets/20250107_093018.DhsDBB_Q.png",
+    "src": "src/lib/assets/artworks/traditional/20250107_093018.png"
+  },
+  "src/lib/assets/artworks/traditional/20250114_145241.png": {
+    "file": "_app/immutable/assets/20250114_145241.Dg9vG-fM.png",
+    "src": "src/lib/assets/artworks/traditional/20250114_145241.png"
+  },
+  "src/lib/assets/artworks/traditional/Alexander.png": {
+    "file": "_app/immutable/assets/Alexander.CBGluIu6.png",
+    "src": "src/lib/assets/artworks/traditional/Alexander.png"
+  },
+  "src/lib/assets/artworks/traditional/kayra_bust.png": {
+    "file": "_app/immutable/assets/kayra_bust.CVoTgbbM.png",
+    "src": "src/lib/assets/artworks/traditional/kayra_bust.png"
+  },
+  "src/lib/assets/artworks/traditional/male sketch.png": {
+    "file": "_app/immutable/assets/male sketch.vPXKjz0G.png",
+    "src": "src/lib/assets/artworks/traditional/male sketch.png"
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "name": "entries/pages/_layout.svelte",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_internal.js",
+      "_server2.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout.CFliTSFz.css"
+    ]
+  },
+  "src/routes/+layout.ts": {
+    "file": "entries/pages/_layout.ts.js",
+    "name": "entries/pages/_layout.ts",
+    "src": "src/routes/+layout.ts",
+    "isEntry": true
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "name": "entries/pages/_page.svelte",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_server2.js",
+      "_male sketch.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.CCeJwMya.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/death.D2qj58CJ.png",
+      "_app/immutable/assets/self portrait.CTFtIpn8.png",
+      "_app/immutable/assets/thewolf.Bu-lPywE.png",
+      "_app/immutable/assets/sculpting1.CDJXnGss.PNG",
+      "_app/immutable/assets/Freelance.IJhd5KzV.PNG",
+      "_app/immutable/assets/warcrimes.co.DC2oFZ-H.PNG"
+    ]
+  },
+  "src/routes/about/+page.svelte": {
+    "file": "entries/pages/about/_page.svelte.js",
+    "name": "entries/pages/about/_page.svelte",
+    "src": "src/routes/about/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_server2.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.CMwQ42Rz.css"
+    ]
+  },
+  "src/routes/contact/+page.svelte": {
+    "file": "entries/pages/contact/_page.svelte.js",
+    "name": "entries/pages/contact/_page.svelte",
+    "src": "src/routes/contact/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_server2.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.fv6i175N.css"
+    ]
+  },
+  "src/routes/traditional-work/+page.svelte": {
+    "file": "entries/pages/traditional-work/_page.svelte.js",
+    "name": "entries/pages/traditional-work/_page.svelte",
+    "src": "src/routes/traditional-work/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_server2.js",
+      "_male sketch.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.CsJ8XHLx.css"
+    ]
+  }
+}

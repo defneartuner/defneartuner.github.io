@@ -62,6 +62,19 @@
 		<p class="heading-note">Practice notes<br />Defne Artuner · 2026</p>
 	</div>
 
+	<section class="availability" aria-labelledby="availability-heading">
+		<div>
+			<p class="availability-label"><span aria-hidden="true"></span> Open to opportunities</p>
+			<h2 id="availability-heading">Available for<br />Erasmus+ 3D Art Internships</h2>
+		</div>
+		<a
+			class="availability-link"
+			href="mailto:defneartuner@gmail.com?subject=Erasmus%2B%203D%20Art%20Internship"
+		>
+			<span>Get in touch</span><span aria-hidden="true">↗</span>
+		</a>
+	</section>
+
 	<div class="about-intro">
 		<p class="intro-label">01 — The approach<br />Defne Artuner<br />Artist · Ankara, Türkiye</p>
 		<p class="bio">
@@ -159,6 +172,19 @@
 			</ul>
 		</div>
 	</section>
+
+	<section class="about-section cv-section" aria-labelledby="cv-heading">
+		<div class="section-title">
+			<p class="section-index">07 / Download</p>
+			<h2 id="cv-heading">Curriculum<br />vitae</h2>
+		</div>
+		<div class="cv-download">
+			<p>For a concise overview of my experience, education and practice.</p>
+			<a class="cv-button" href="/Defne_Artuner_CV.pdf" download="Defne_Artuner_CV.pdf">
+				<span>Download CV</span><span aria-hidden="true">↓</span>
+			</a>
+		</div>
+	</section>
 </section>
 
 <style>
@@ -213,6 +239,59 @@
 		justify-self: end;
 		margin: 0 0 5px;
 		color: rgb(196 191 172 / 65%);
+	}
+
+	.availability {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 30px;
+		padding: 30px 0 36px;
+		border-bottom: 1px solid rgb(196 191 172 / 28%);
+	}
+
+	.availability-label {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0 0 16px;
+		color: #c4bfac;
+		font-family: 'DM Mono', monospace;
+		font-size: 13px;
+		text-transform: uppercase;
+	}
+
+	.availability-label span {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: #a7b27a;
+	}
+
+	.availability h2 {
+		font-size: clamp(30px, 4vw, 52px);
+		line-height: 1.08;
+	}
+
+	.availability-link {
+		display: inline-flex;
+		min-width: 175px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+		padding: 14px 16px;
+		border: 1px solid #c4bfac;
+		font-family: 'DM Mono', monospace;
+		font-size: 13px;
+		text-transform: uppercase;
+		transition:
+			background-color 180ms ease,
+			color 180ms ease;
+	}
+
+	.availability-link:hover {
+		background: #c4bfac;
+		color: #271118;
 	}
 
 	.about-intro {
@@ -330,6 +409,44 @@
 		column-gap: 9%;
 		row-gap: 68px;
 		padding-top: 30px;
+	}
+
+	.cv-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: end;
+		gap: 9%;
+		margin-top: 68px;
+		padding-top: 30px;
+	}
+
+	.cv-download p {
+		max-width: 360px;
+		margin: 0 0 24px;
+		color: rgb(196 191 172 / 75%);
+		font-size: 17px;
+		line-height: 1.7;
+	}
+
+	.cv-button {
+		display: inline-flex;
+		min-width: 210px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 32px;
+		padding: 15px 18px;
+		border: 1px solid #c4bfac;
+		font-family: 'DM Mono', monospace;
+		font-size: 14px;
+		text-transform: uppercase;
+		transition:
+			background-color 180ms ease,
+			color 180ms ease;
+	}
+
+	.cv-button:hover {
+		background: #c4bfac;
+		color: #271118;
 	}
 
 	.details-column {
@@ -450,6 +567,10 @@
 			font-size: 112px;
 		}
 
+		.availability h2 {
+			font-size: clamp(30px, 6vw, 42px);
+		}
+
 		.about-intro {
 			grid-template-columns: 1fr 2fr;
 			gap: 6%;
@@ -480,6 +601,16 @@
 			margin-top: 27px;
 		}
 
+		.availability {
+			align-items: start;
+			flex-direction: column;
+			gap: 23px;
+		}
+
+		.availability h2 {
+			font-size: 32px;
+		}
+
 		.about-intro,
 		.applications {
 			grid-template-columns: 1fr;
@@ -507,6 +638,12 @@
 		.details-section {
 			grid-template-columns: 1fr;
 			row-gap: 47px;
+		}
+
+		.cv-section {
+			grid-template-columns: 1fr;
+			gap: 22px;
+			margin-top: 47px;
 		}
 
 		.application-list {

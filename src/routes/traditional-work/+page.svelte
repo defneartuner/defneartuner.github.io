@@ -88,7 +88,7 @@
 		grid-template-columns: 1fr 0.62fr;
 		align-items: end;
 		padding: 12px 0 40px;
-		border-bottom: 1px solid rgb(196 191 172 / 28%);
+		border-bottom: 1px solid rgb(104 82 92 / 28%);
 	}
 
 	.page-tag,
@@ -102,7 +102,7 @@
 	.page-tag {
 		grid-column: 1 / -1;
 		margin: 0 0 28px;
-		color: #c4bfac;
+		color: var(--text-secondary);
 	}
 
 	h1 {
@@ -123,7 +123,7 @@
 	.heading-note {
 		justify-self: end;
 		margin: 0 0 8px;
-		color: rgb(196 191 172 / 70%);
+		color: var(--text-secondary);
 	}
 
 	.artwork-grid {
@@ -150,23 +150,25 @@
 		width: 100%;
 		height: 540px;
 		object-fit: contain;
-		border: 1px solid rgb(196 191 172 / 20%);
-		background: #140b0d;
+		border: 1px solid rgb(104 82 92 / 20%);
+		background: #271118;
 	}
 
 	.artwork-label {
+		padding: 9px 10px;
+		background: #68525c;
 		font-family: 'DM Mono', monospace;
 		font-size: 12px;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		color: rgb(196 191 172 / 76%);
+		color: #c4bfac;
 	}
 
 	.empty-state {
 		grid-column: 1 / -1;
 		padding: 64px 0;
-		border: 1px dashed rgb(196 191 172 / 24%);
-		color: rgb(196 191 172 / 72%);
+		border: 1px dashed rgb(104 82 92 / 24%);
+		color: #c4bfac;
 		font-family: 'DM Mono', monospace;
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
@@ -178,7 +180,7 @@
 		inset: 0;
 		display: grid;
 		place-items: center;
-		background: rgb(18 10 12 / 82%);
+		background: rgb(39 17 24 / 82%);
 		padding: 32px;
 		z-index: 20;
 	}
@@ -187,8 +189,8 @@
 		position: relative;
 		width: min(960px, 92vw);
 		padding: 22px 22px 14px;
-		background: #1b0d12;
-		border: 1px solid rgb(196 191 172 / 20%);
+		background: #271118;
+		border: 1px solid rgb(104 82 92 / 20%);
 	}
 
 	.close-button {
@@ -197,9 +199,9 @@
 		right: 12px;
 		width: 34px;
 		height: 34px;
-		border: 1px solid rgb(196 191 172 / 24%);
+		border: 1px solid rgb(104 82 92 / 24%);
 		background: transparent;
-		color: #f3efe6;
+		color: #c4bfac;
 		font-size: 28px;
 		cursor: pointer;
 	}
@@ -218,12 +220,12 @@
 		width: 100%;
 		max-height: 76vh;
 		object-fit: contain;
-		background: #140b0d;
+		background: #271118;
 	}
 
 	.lightbox-panel p {
 		margin: 16px 0 0;
-		color: rgb(196 191 172 / 82%);
+		color: var(--text-secondary);
 		font-family: 'DM Mono', monospace;
 		font-size: 12px;
 		letter-spacing: 0.08em;

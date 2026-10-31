@@ -42,14 +42,14 @@
 		justify-content: space-between;
 		gap: 15px;
 		padding: 12px 0;
-		color: rgb(196 191 172 / 64%);
+		color: var(--text-secondary);
 		font-family: 'DM Mono', monospace;
 		font-size: 14px;
 		text-transform: uppercase;
 	}
 
 	.contact-topline {
-		border-bottom: 1px solid rgb(196 191 172 / 24%);
+		border-bottom: 1px solid rgb(104 82 92 / 24%);
 		font-size: 17px;
 	}
 
@@ -73,7 +73,7 @@
 
 	.contact-kicker,
 	.contact-index {
-		color: #c4bfac;
+		color: var(--text-secondary);
 		font-family: 'DM Mono', monospace;
 		font-size: 14px;
 		text-transform: uppercase;
@@ -86,7 +86,7 @@
 	.contact-details {
 		max-width: 310px;
 		padding-top: 17px;
-		border-top: 1px solid rgb(196 191 172 / 42%);
+		border-top: 1px solid rgb(104 82 92 / 42%);
 	}
 
 	.contact-index {
@@ -115,7 +115,7 @@
 	}
 
 	.contact-bottomline {
-		border-top: 1px solid rgb(196 191 172 / 24%);
+		border-top: 1px solid rgb(104 82 92 / 24%);
 	}
 
 	@media (max-width: 760px) {

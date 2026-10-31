@@ -52,6 +52,10 @@
 		margin: 0;
 		background: #271118;
 		color: #c4bfac;
+		--background: #271118;
+		--text-primary: #c4bfac;
+		--text-secondary: #a39599;
+		--accent: #68525c;
 		font-family: 'DM Sans', sans-serif;
 		-webkit-font-smoothing: antialiased;
 	}
@@ -62,13 +66,27 @@
 	}
 
 	:global(button),
-	:global(input) {
+	:global(input),
+	:global(textarea),
+	:global(select) {
 		font: inherit;
+		color: #c4bfac;
+	}
+
+	:global(input),
+	:global(textarea),
+	:global(select) {
+		background: #271118;
+	}
+
+	:global(input::placeholder),
+	:global(textarea::placeholder) {
+		color: #c4bfac;
 	}
 
 	:global(::selection) {
-		background: #c4bfac;
-		color: #170a0e;
+		background: #68525c;
+		color: #c4bfac;
 	}
 
 	.site-shell {
@@ -81,7 +99,7 @@
 		grid-template-columns: 1fr 1fr 1fr;
 		align-items: center;
 		min-height: 92px;
-		border-bottom: 1px solid rgb(196 191 172 / 22%);
+		border-bottom: 1px solid rgb(104 82 92 / 22%);
 	}
 
 	.wordmark {
@@ -120,8 +138,8 @@
 		justify-content: space-between;
 		gap: 18px;
 		padding: 24px 0 28px;
-		border-top: 1px solid rgb(196 191 172 / 22%);
-		color: rgb(196 191 172 / 68%);
+		border-top: 1px solid rgb(104 82 92 / 22%);
+		color: var(--text-secondary);
 		font-size: 11px;
 	}
 
@@ -151,7 +169,7 @@
 		--burgundy: #271118;
 		--paper: #c4bfac;
 		--accent: #68525c;
-		--line: rgb(196 191 172 / 24%);
+		--line: rgb(104 82 92 / 24%);
 		font-family: 'DM Sans', sans-serif;
 	}
 
@@ -178,7 +196,8 @@
 		height: 39px;
 		place-items: center;
 		border: 1px solid var(--accent);
-		color: var(--accent);
+		background: var(--accent);
+		color: var(--paper);
 		font-size: 12px;
 		font-weight: 700;
 	}
@@ -199,7 +218,7 @@
 
 	.header-note span {
 		display: block;
-		color: rgb(196 191 172 / 54%);
+		color: var(--text-secondary);
 	}
 
 	nav {
@@ -217,8 +236,13 @@
 	}
 
 	nav a span {
-		color: var(--accent);
-		font-size: 12px;
+		display: inline-grid;
+		width: 24px;
+		height: 24px;
+		place-items: center;
+		background: var(--accent);
+		color: var(--paper);
+		font-size: 11px;
 	}
 
 	.site-footer {
@@ -232,7 +256,9 @@
 
 	.site-footer a span {
 		margin-left: 7px;
-		color: var(--accent);
+		padding: 2px 5px;
+		background: var(--accent);
+		color: var(--paper);
 	}
 
 	@media (max-width: 760px) {

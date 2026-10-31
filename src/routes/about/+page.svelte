@@ -203,7 +203,7 @@
 		grid-template-columns: 1fr 0.48fr;
 		align-items: end;
 		padding: 17px 0 42px;
-		border-bottom: 1px solid rgb(196 191 172 / 28%);
+		border-bottom: 1px solid rgb(104 82 92 / 28%);
 	}
 
 	.page-number,
@@ -222,7 +222,7 @@
 	.page-number {
 		grid-column: 1 / -1;
 		margin: 0 0 41px;
-		color: #c4bfac;
+		color: var(--text-secondary);
 	}
 
 	h1 {
@@ -244,7 +244,7 @@
 	.heading-note {
 		justify-self: end;
 		margin: 0 0 5px;
-		color: rgb(196 191 172 / 65%);
+		color: var(--text-secondary);
 	}
 
 	.availability {
@@ -253,7 +253,7 @@
 		justify-content: space-between;
 		gap: 30px;
 		padding: 30px 0 36px;
-		border-bottom: 1px solid rgb(196 191 172 / 28%);
+		border-bottom: 1px solid rgb(104 82 92 / 28%);
 	}
 
 	.availability-label {
@@ -261,7 +261,7 @@
 		align-items: center;
 		gap: 10px;
 		margin: 0 0 16px;
-		color: #c4bfac;
+		color: var(--text-secondary);
 		font-family: 'DM Mono', monospace;
 		font-size: 13px;
 		text-transform: uppercase;
@@ -270,8 +270,9 @@
 	.availability-label span {
 		width: 8px;
 		height: 8px;
+		border: 1px solid #c4bfac;
 		border-radius: 50%;
-		background: #a7b27a;
+		background: #68525c;
 	}
 
 	.availability h2 {
@@ -296,8 +297,8 @@
 	}
 
 	.availability-link:hover {
-		background: #c4bfac;
-		color: #271118;
+		background: #68525c;
+		color: #c4bfac;
 	}
 
 	.about-intro {
@@ -306,12 +307,12 @@
 		gap: 9%;
 		margin: 0 0 90px;
 		padding: 30px 0 48px;
-		border-bottom: 1px solid rgb(196 191 172 / 28%);
+		border-bottom: 1px solid rgb(104 82 92 / 28%);
 	}
 
 	.intro-label {
 		margin: 5px 0 0;
-		color: #c4bfac;
+		color: var(--text-secondary);
 		font-family: 'DM Mono', monospace;
 		font-size: 14px;
 		line-height: 2;
@@ -321,7 +322,7 @@
 	.bio {
 		max-width: 790px;
 		margin: 0;
-		color: rgb(196 191 172 / 88%);
+		color: #c4bfac;
 		font-size: 19px;
 		line-height: 1.85;
 	}
@@ -344,7 +345,7 @@
 
 	.artist-quote footer {
 		margin-top: 17px;
-		color: #c4bfac;
+		color: var(--text-secondary);
 		font-family: 'DM Mono', monospace;
 		font-size: 14px;
 		line-height: 1.8;
@@ -352,7 +353,7 @@
 	}
 
 	.about-section {
-		border-top: 1px solid rgb(196 191 172 / 28%);
+		border-top: 1px solid rgb(104 82 92 / 28%);
 	}
 
 	.section-title {
@@ -361,7 +362,7 @@
 
 	.section-index {
 		margin: 0 0 18px;
-		color: #c4bfac;
+		color: var(--text-secondary);
 	}
 
 	h2 {
@@ -400,12 +401,12 @@
 		align-items: baseline;
 		gap: 12px;
 		padding: 15px 0;
-		border-bottom: 1px solid rgb(196 191 172 / 17%);
+		border-bottom: 1px solid rgb(104 82 92 / 17%);
 		font-size: 17px;
 	}
 
 	.application-list li span {
-		color: #c4bfac;
+		color: var(--text-secondary);
 		font-size: 14px;
 	}
 
@@ -430,7 +431,7 @@
 	.cv-download p {
 		max-width: 360px;
 		margin: 0 0 24px;
-		color: rgb(196 191 172 / 75%);
+		color: var(--text-secondary);
 		font-size: 17px;
 		line-height: 1.7;
 	}
@@ -452,8 +453,8 @@
 	}
 
 	.cv-button:hover {
-		background: #c4bfac;
-		color: #271118;
+		background: #68525c;
+		color: #c4bfac;
 	}
 
 	.details-column {
@@ -466,8 +467,8 @@
 
 	.plain-list li {
 		padding: 11px 0;
-		border-bottom: 1px solid rgb(196 191 172 / 15%);
-		color: rgb(196 191 172 / 88%);
+		border-bottom: 1px solid rgb(104 82 92 / 15%);
+		color: #c4bfac;
 		font-size: 17px;
 	}
 
@@ -477,7 +478,7 @@
 
 	.experience-item {
 		padding: 0 0 22px 17px;
-		border-left: 1px solid rgb(196 191 172 / 45%);
+		border-left: 1px solid rgb(104 82 92 / 45%);
 	}
 
 	.experience-item + .experience-item {
@@ -494,13 +495,13 @@
 
 	.experience-item p {
 		margin: 6px 0 0;
-		color: rgb(196 191 172 / 72%);
+		color: var(--text-secondary);
 		font-size: 17px;
 		line-height: 1.6;
 	}
 
 	.experience-item .experience-date {
-		color: #c4bfac;
+		color: var(--text-secondary);
 		font-size: 15px;
 		letter-spacing: 0.05em;
 	}
@@ -518,7 +519,7 @@
 
 	.reference-list li + li {
 		padding-top: 12px;
-		border-top: 1px solid rgb(196 191 172 / 15%);
+		border-top: 1px solid rgb(104 82 92 / 15%);
 	}
 
 	.reference-list li span {
@@ -529,7 +530,7 @@
 
 	.reference-list a {
 		width: fit-content;
-		color: rgb(196 191 172 / 69%);
+		color: var(--text-secondary);
 		font-size: 17px;
 		transition: color 180ms ease;
 	}
@@ -547,12 +548,12 @@
 		justify-content: space-between;
 		gap: 12px;
 		padding: 13px 0;
-		border-bottom: 1px solid rgb(196 191 172 / 15%);
+		border-bottom: 1px solid rgb(104 82 92 / 15%);
 		font-size: 17px;
 	}
 
 	.language-list li span:last-child {
-		color: #c4bfac;
+		color: var(--text-secondary);
 		text-align: right;
 	}
 

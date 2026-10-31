@@ -46,6 +46,9 @@
 	<div class="hero-meta">
 		<span>Independent practice / 2026</span>
 	</div>
+	<div class="home-availability">
+		<p>Available for<br />Erasmus+ 3D Art Summer Internship</p>
+	</div>
 	<div class="hero-body">
 		<div class="hero-title">
 			<p class="hero-kicker">3D artist <span>·</span> character design</p>
@@ -156,6 +159,21 @@
 	.hero-meta {
 		min-height: 35px;
 		color: rgb(196 191 172 / 67%);
+	}
+
+	.home-availability {
+		padding: 0 0 18px;
+	}
+
+	.home-availability p {
+		margin: 0;
+		color: #c4bfac;
+		font-family: 'Syne', sans-serif;
+		font-size: clamp(30px, 4vw, 52px);
+		font-weight: 500;
+		line-height: 1.08;
+		text-transform: none;
+		letter-spacing: 0;
 	}
 
 	.hero-body {

@@ -38,6 +38,11 @@
 			link: 'https://disarch42.itch.io/desyncromaniac'
 		},
 		{
+			title: 'Tattoo Artist - Apprenticeship',
+			date: '2024 – 2026',
+			description: 'Blackwork and Dotwork'
+		},
+		{
 			title: 'Freelance',
 			date: '2025 – Now',
 			description: 'Creating custom 2D assets'
@@ -65,11 +70,11 @@
 	<section class="availability" aria-labelledby="availability-heading">
 		<div>
 			<p class="availability-label"><span aria-hidden="true"></span> Open to opportunities</p>
-			<h2 id="availability-heading">Available for<br />Erasmus+ 3D Art Internships</h2>
+			<h2 id="availability-heading">Available for<br />Erasmus+ 3D Art Summer Internship</h2>
 		</div>
 		<a
 			class="availability-link"
-			href="mailto:defneartuner@gmail.com?subject=Erasmus%2B%203D%20Art%20Internship"
+			href="mailto:defneartuner@gmail.com?subject=Erasmus%2B%203D%20Art%20Summer%20Internship"
 		>
 			<span>Get in touch</span><span aria-hidden="true">↗</span>
 		</a>
@@ -94,9 +99,22 @@
 		<footer>— An Unquiet Mind: A Memoir of Moods and Madness, Kay Redfield Jamison</footer>
 	</blockquote>
 
+	<section class="about-section cv-section" aria-labelledby="cv-heading">
+		<div class="section-title">
+			<p class="section-index">02 / Download</p>
+			<h2 id="cv-heading">Curriculum<br />vitae</h2>
+		</div>
+		<div class="cv-download">
+			<p>For a concise overview of my experience, education and practice.</p>
+			<a class="cv-button" href="/Defne_Artuner_CV.pdf" download="Defne_Artuner_CV.pdf">
+				<span>Download CV</span><span aria-hidden="true">↓</span>
+			</a>
+		</div>
+	</section>
+
 	<section class="about-section applications" aria-labelledby="softwares-heading">
 		<div class="section-title">
-			<p class="section-index">02 / Tools</p>
+			<p class="section-index">03 / Tools</p>
 			<h2 id="softwares-heading">Softwares</h2>
 		</div>
 		<ul class="application-list">
@@ -112,7 +130,7 @@
 	>
 		<div class="details-column skills-column">
 			<div class="section-title">
-				<p class="section-index">03 / Skills</p>
+				<p class="section-index">04 / Skills</p>
 				<h2>Skills</h2>
 			</div>
 			<ul class="plain-list">
@@ -124,7 +142,7 @@
 
 		<div class="details-column experience-column">
 			<div class="section-title">
-				<p class="section-index">04 / Timeline</p>
+				<p class="section-index">05 / Timeline</p>
 				<h2>Experiences</h2>
 			</div>
 			<div class="experience-list">
@@ -145,7 +163,7 @@
 
 		<div class="details-column references-column">
 			<div class="section-title">
-				<p class="section-index">05 / People</p>
+				<p class="section-index">06 / People</p>
 				<h2>References</h2>
 			</div>
 			<ul class="reference-list">
@@ -162,7 +180,7 @@
 
 		<div class="details-column languages-column">
 			<div class="section-title">
-				<p class="section-index">06 / Languages</p>
+				<p class="section-index">07 / Languages</p>
 				<h2>Languages</h2>
 			</div>
 			<ul class="language-list">
@@ -173,18 +191,6 @@
 		</div>
 	</section>
 
-	<section class="about-section cv-section" aria-labelledby="cv-heading">
-		<div class="section-title">
-			<p class="section-index">07 / Download</p>
-			<h2 id="cv-heading">Curriculum<br />vitae</h2>
-		</div>
-		<div class="cv-download">
-			<p>For a concise overview of my experience, education and practice.</p>
-			<a class="cv-button" href="/Defne_Artuner_CV.pdf" download="Defne_Artuner_CV.pdf">
-				<span>Download CV</span><span aria-hidden="true">↓</span>
-			</a>
-		</div>
-	</section>
 </section>
 
 <style>
@@ -418,6 +424,7 @@
 		gap: 9%;
 		margin-top: 68px;
 		padding-top: 30px;
+		padding-bottom: 44px;
 	}
 
 	.cv-download p {

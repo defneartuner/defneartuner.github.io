@@ -9,7 +9,7 @@
 	const categories: Category[] = [
 		{ id: 'freelance', title: 'Freelance', note: 'Selected commissions' },
 		{ id: '2d-designs', title: '2D Designs', note: 'Characters & worlds' },
-		{ id: '3d-designs', title: '3D Designs', note: 'Sculpture & form' }
+		{ id: '3d-designs', title: 'Project 1', note: 'Selected project' }
 	];
 	const artworkFiles = import.meta.glob<string>(
 		'../lib/assets/artworks/*/*.{avif,gif,jpg,jpeg,png,svg,webp,AVIF,GIF,JPG,JPEG,PNG,SVG,WEBP}',

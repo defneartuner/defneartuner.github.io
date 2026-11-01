@@ -34,7 +34,7 @@
 	<footer class="site-footer">
 		<span>© 2026 · Defne Artuner</span>
 		<span>Form / character / emotion</span>
-		<a href="mailto:defneartuner@gmail.com">Start a conversation <span>↗</span></a>
+		<a href="mailto:defneartunerr@gmail.com">Start a conversation <span>↗</span></a>
 	</footer>
 </div>
 

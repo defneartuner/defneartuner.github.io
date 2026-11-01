@@ -74,7 +74,7 @@
 		</div>
 		<a
 			class="availability-link"
-			href="mailto:defneartuner@gmail.com?subject=Erasmus%2B%203D%20Art%20Summer%20Internship"
+			href="mailto:defneartunerr@gmail.com?subject=Erasmus%2B%203D%20Art%20Summer%20Internship"
 		>
 			<span>Get in touch</span><span aria-hidden="true">↗</span>
 		</a>

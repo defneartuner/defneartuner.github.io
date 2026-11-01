@@ -16,8 +16,22 @@
 		<div class="contact-details">
 			<p class="contact-index">01 — Direct contact</p>
 			<p class="contact-name">Defne Artuner</p>
-			<a href="mailto:defneartuner@gmail.com"
-				>defneartuner@gmail.com <span aria-hidden="true">↗</span></a
+			<a href="mailto:defneartunerr@gmail.com"
+				>defneartunerr@gmail.com <span aria-hidden="true">↗</span></a
+			>
+			<a
+				class="social-link"
+				href="https://tr.linkedin.com/in/defne-artuner-b73494337/tr"
+				target="_blank"
+				rel="noreferrer"
+				>LinkedIn <span aria-hidden="true">↗</span></a
+			>
+			<a
+				class="social-link"
+				href="https://www.artstation.com/vemdion3"
+				target="_blank"
+				rel="noreferrer"
+				>ArtStation <span aria-hidden="true">↗</span></a
 			>
 		</div>
 	</div>
@@ -101,8 +115,19 @@
 	}
 
 	.contact-details a {
+		display: block;
 		font-size: 18px;
 		transition: color 180ms ease;
+	}
+
+	.contact-details a + a {
+		margin-top: 12px;
+	}
+
+	.contact-details .social-link {
+		padding: 10px 12px;
+		border: 1px solid rgb(104 82 92 / 42%);
+		font-size: 21px;
 	}
 
 	.contact-details a:hover {

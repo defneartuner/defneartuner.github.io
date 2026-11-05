@@ -34,6 +34,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          DATABASE_URL: file:local.db
+          ORIGIN: https://defneartuner.github.io
+          BETTER_AUTH_SECRET: static-site-build-only-placeholder-do-not-use-at-runtime
       - name: Replace published portfolio files
         run: |
           rm -rf about.html contact.html 2d-designs 3d-designs assets freelance traditional

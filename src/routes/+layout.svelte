@@ -223,16 +223,34 @@
 
 	nav {
 		justify-content: flex-end;
-		gap: clamp(18px, 3vw, 42px);
+		gap: clamp(8px, 1.4vw, 20px);
 		font-family: 'DM Mono', monospace;
-		font-size: 17px;
+		font-size: 18px;
 		letter-spacing: 0;
 	}
 
 	nav a {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 9px;
+		padding: 9px 12px;
+		border: 1px solid var(--text-secondary);
+		background: rgb(104 82 92 / 32%);
+		transition:
+			background-color 180ms ease,
+			border-color 180ms ease,
+			color 180ms ease;
+	}
+
+	nav a:hover {
+		border-color: var(--paper);
+		background: var(--paper);
+		color: var(--burgundy);
+	}
+
+	nav a:focus-visible {
+		outline: 2px solid var(--paper);
+		outline-offset: 3px;
 	}
 
 	nav a span {
@@ -261,15 +279,15 @@
 		color: var(--paper);
 	}
 
-	@media (max-width: 760px) {
+	@media (max-width: 1000px) {
 		.site-shell {
 			width: min(100% - 40px, 1480px);
 		}
 
 		.site-header {
-			grid-template-columns: 1fr auto;
-			row-gap: 0;
-			min-height: 76px;
+			grid-template-columns: 1fr;
+			row-gap: 16px;
+			padding: 16px 0;
 		}
 
 		.header-note {
@@ -277,12 +295,14 @@
 		}
 
 		nav {
-			gap: 14px;
-			font-size: 15px;
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 8px;
+			font-size: 17px;
 		}
 
 		nav a {
-			gap: 4px;
+			gap: 8px;
 		}
 	}
 
@@ -301,12 +321,20 @@
 		}
 
 		nav {
-			gap: 10px;
-			font-size: 13px;
+			gap: 7px;
+			font-size: 14px;
+		}
+
+		nav a {
+			gap: 6px;
+			min-height: 48px;
+			padding: 9px 8px;
 		}
 
 		nav a span {
-			display: none;
+			width: 22px;
+			height: 22px;
+			font-size: 10px;
 		}
 
 		.site-footer {

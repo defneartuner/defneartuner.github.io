@@ -51,6 +51,10 @@
 			title: 'B.F.A in Sculpture · Hacettepe University',
 			date: '2024 – Now',
 			description: ''
+		},
+		{
+			title: 'Hacettepe University Digital Game Development Community',
+			description: 'Member of the board of directors'
 		}
 	];
 </script>

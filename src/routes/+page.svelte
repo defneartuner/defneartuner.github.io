@@ -9,7 +9,7 @@
 	const categories: Category[] = [
 		{ id: 'freelance', title: 'Freelance', note: 'Selected commissions' },
 		{ id: '2d-designs', title: '2D Designs', note: 'Characters & worlds' },
-		{ id: '3d-designs', title: '3D Designs', note: 'Project 1' }
+		{ id: '3d-designs', title: '3D Designs', note: 'Stylized Character' }
 	];
 	const artworkFiles = import.meta.glob<string>(
 		'../lib/assets/artworks/*/*.{avif,gif,jpg,jpeg,png,svg,webp,AVIF,GIF,JPG,JPEG,PNG,SVG,WEBP}',
@@ -86,7 +86,9 @@
 					<p class="category-number">0{index + 1}<span> / 03</span></p>
 					<div class="category-title">
 						<h3 id={`category-${category.id}`}>{category.title}</h3>
-						<p class="category-note">{category.note}</p>
+						<p class={`category-note ${category.id === '3d-designs' ? 'category-note-featured' : ''}`}>
+							{category.note}
+						</p>
 					</div>
 					<p class="category-count">{artworksByCategory[category.id].length} works</p>
 				</div>
@@ -381,6 +383,13 @@
 		margin: 6px 0 0;
 		color: var(--text-secondary);
 		font-size: 16px;
+	}
+
+	.category-note-featured {
+		color: #c4bfac;
+		font-size: clamp(18px, 2vw, 28px);
+		font-weight: 500;
+		line-height: 1.4;
 	}
 
 	.category-count {

@@ -40,7 +40,7 @@ jobs:
           BETTER_AUTH_SECRET: static-site-build-only-placeholder-do-not-use-at-runtime
       - name: Replace published portfolio files
         run: |
-          rm -rf about.html contact.html 2d-designs 3d-designs assets freelance traditional
+          rm -rf _app about.html contact.html 2d-designs 3d-designs assets freelance traditional
           cp -a build/. .
           git rm -r --cached --ignore-unmatch -- .svelte-kit build node_modules
           git config user.name "github-actions[bot]"

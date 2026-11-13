@@ -71,19 +71,6 @@
 		<p class="heading-note">Practice notes<br />Defne Artuner · 2026</p>
 	</div>
 
-	<section class="availability" aria-labelledby="availability-heading">
-		<div>
-			<p class="availability-label"><span aria-hidden="true"></span> Open to opportunities</p>
-			<h2 id="availability-heading">Available for<br />Erasmus+ 3D Art Summer Internship</h2>
-		</div>
-		<a
-			class="availability-link"
-			href="mailto:defneartunerr@gmail.com?subject=Erasmus%2B%203D%20Art%20Summer%20Internship"
-		>
-			<span>Get in touch</span><span aria-hidden="true">↗</span>
-		</a>
-	</section>
-
 	<div class="about-intro">
 		<p class="intro-label">01 — The approach<br />Defne Artuner<br />Artist · Ankara, Türkiye</p>
 		<p class="bio">
@@ -249,60 +236,6 @@
 		justify-self: end;
 		margin: 0 0 5px;
 		color: var(--text-secondary);
-	}
-
-	.availability {
-		display: flex;
-		align-items: end;
-		justify-content: space-between;
-		gap: 30px;
-		padding: 30px 0 36px;
-		border-bottom: 1px solid rgb(104 82 92 / 28%);
-	}
-
-	.availability-label {
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		margin: 0 0 16px;
-		color: var(--text-secondary);
-		font-family: 'DM Mono', monospace;
-		font-size: 13px;
-		text-transform: uppercase;
-	}
-
-	.availability-label span {
-		width: 8px;
-		height: 8px;
-		border: 1px solid #c4bfac;
-		border-radius: 50%;
-		background: #68525c;
-	}
-
-	.availability h2 {
-		font-size: clamp(30px, 4vw, 52px);
-		line-height: 1.08;
-	}
-
-	.availability-link {
-		display: inline-flex;
-		min-width: 175px;
-		align-items: center;
-		justify-content: space-between;
-		gap: 24px;
-		padding: 14px 16px;
-		border: 1px solid #c4bfac;
-		font-family: 'DM Mono', monospace;
-		font-size: 13px;
-		text-transform: uppercase;
-		transition:
-			background-color 180ms ease,
-			color 180ms ease;
-	}
-
-	.availability-link:hover {
-		background: #68525c;
-		color: #c4bfac;
 	}
 
 	.about-intro {
@@ -579,10 +512,6 @@
 			font-size: 112px;
 		}
 
-		.availability h2 {
-			font-size: clamp(30px, 6vw, 42px);
-		}
-
 		.about-intro {
 			grid-template-columns: 1fr 2fr;
 			gap: 6%;
@@ -611,16 +540,6 @@
 		.heading-note {
 			justify-self: start;
 			margin-top: 27px;
-		}
-
-		.availability {
-			align-items: start;
-			flex-direction: column;
-			gap: 23px;
-		}
-
-		.availability h2 {
-			font-size: 32px;
 		}
 
 		.about-intro,

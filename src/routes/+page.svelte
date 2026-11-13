@@ -20,7 +20,11 @@
 			category.id,
 			Object.entries(artworkFiles)
 				.filter(([path]) => path.split('/').slice(-2, -1)[0] === category.id)
-				.map(([path, url]) => ({ path, name: path.split('/').pop() ?? path, url }))
+				.map(([path, url]) => ({
+					path,
+					name: (path.split('/').pop() ?? path).replace(/[_-]+/g, ' '),
+					url
+				}))
 		])
 	);
 
